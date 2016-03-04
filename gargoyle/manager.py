@@ -40,8 +40,9 @@ class SwitchManager(ModelDict):
 
         >>> gargoyle.is_active('my_feature', request) #doctest: +SKIP
         """
-        if hasattr(settings, 'GARGOYLE_OVERRIDE') and settings.GARGOYLE_OVERRIDE in (True, False, None,):
-            return settings.GARGOYLE_OVERRIDE
+        override = getattr(settings, 'GARGOYLE_GLOBAL_OVERRIDE', None)
+        if override != None:
+            return override
 
         default = kwargs.pop('default', False)
 
