@@ -40,6 +40,10 @@ class SwitchManager(ModelDict):
 
         >>> gargoyle.is_active('my_feature', request) #doctest: +SKIP
         """
+        override = getattr(settings, 'GARGOYLE_GLOBAL_OVERRIDE', None)
+        if override != None:
+            return override
+
         default = kwargs.pop('default', False)
 
         # Check all parents for a disabled state
